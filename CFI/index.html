@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuthentiScan | EXIF Metadata Analyzer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Exifr Library -->
+    <script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob primary-blob"></div>
+        <div class="blob secondary-blob"></div>
+    </div>
+    
+    <main class="container">
+        <header>
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#8a2be2" />
+                            <stop offset="100%" stop-color="#4b0082" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                    <circle cx="12" cy="13" r="3"></circle>
+                </svg>
+                <h1>AuthentiScan</h1>
+            </div>
+            <p>Reveal the hidden truth inside your photos.</p>
+        </header>
+
+        <section class="upload-section glass-card" id="uploadZone">
+            <input type="file" id="fileInput" accept="image/jpeg, image/png, image/webp" hidden>
+            <div class="upload-content">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <h2>Drag & Drop your image here</h2>
+                <p>or</p>
+                <button class="btn-primary" id="browseBtn">Browse Files</button>
+                <p class="supported-formats">Supports JPEG, PNG, WEBP (Max 20MB)</p>
+            </div>
+            <img id="imagePreview" class="image-preview" src="" alt="Image Preview">
+        </section>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading-indicator hidden">
+            <div class="spinner"></div>
+            <p>Analyzing Metadata...</p>
+        </div>
+
+        <section class="results-section hidden" id="resultsSection">
+            <div class="authenticity-card glass-card" id="authenticityCard">
+                <div class="status-header">
+                    <div id="statusIcon" class="status-icon"></div>
+                    <div>
+                        <h2 id="statusTitle">Authenticity Status</h2>
+                        <p id="statusMessage">Evaluating...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metadata-grid">
+                <div class="data-group glass-card">
+                    <h3>Camera Info</h3>
+                    <ul id="cameraInfoList" class="data-list">
+                        <!-- Populated via JS -->
+                    </ul>
+                </div>
+                <div class="data-group glass-card">
+                    <h3>Timing Details</h3>
+                    <ul id="timingInfoList" class="data-list">
+                        <!-- Populated via JS -->
+                    </ul>
+                </div>
+                <div class="data-group glass-card">
+                    <h3>Software / Processing</h3>
+                    <ul id="softwareInfoList" class="data-list">
+                        <!-- Populated via JS -->
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="gps-data-group glass-card hidden" id="gpsSection">
+                <h3>Location Data</h3>
+                <ul id="gpsInfoList" class="data-list">
+                    <!-- Populated via JS -->
+                </ul>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Strictly client-side analysis. No images are uploaded to any server.</p>
+        </footer>
+    </main>
+</body>
+</html>
